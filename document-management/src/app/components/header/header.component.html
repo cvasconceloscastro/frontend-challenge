@@ -1,4 +1,4 @@
-<p-menubar>
+<p-menubar aria-label="Main navigation">
     <div class="navbar-container">
       <div class="title">
         <h1>{{ 'TITLE' | translate }}</h1>
@@ -6,7 +6,7 @@
       <div class="dropdown">
         <label class="label">{{ 'ENABLE_VIEWING_PERMISSIONS' | translate }}</label>
         <div style="padding: 0vh 1vw 0vh 1vw">
-            <p-inputSwitch [(ngModel)]="viewingPermissions" ngDefaultControl></p-inputSwitch>
+            <p-inputSwitch [(ngModel)]="viewingPermissions" ngDefaultControl aria-label="Enable Viewing Permissions"></p-inputSwitch>
         </div>
         <div style="padding-right: 2vw">
           <p-dropdown 
@@ -15,7 +15,8 @@
             ngDefaultControl
             (onChange)="switchLanguage($event.value)"
             placeholder="Select Language"
-            appendTo="body">
+            appendTo="body"
+            aria-label="Select Language">
             <ng-template let-item pTemplate="item">
               <div class="flex align-items-center">
                 <img [src]="item.image" alt="{{ item.label }}" style="width: 20px; height: 20px; margin-right: 5px;">
@@ -26,5 +27,4 @@
         </div>
       </div>
     </div>
-  </p-menubar>
-  
+</p-menubar>

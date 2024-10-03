@@ -1,28 +1,36 @@
 .navbar-container {
-    display: flex;                /* Use flexbox for alignment */
-    justify-content: space-between; /* Space items evenly */
-    align-items: center;         /* Center items vertically */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 98vw;
     color: white;
-  }
-  
-  h1 {
-    margin: 0;                   /* Remove default margin for the title */
-    font-size: 1.5rem;           /* Adjust the font size as needed */
-  }
-  
-  .dropdown{
+    padding: 10px; /* Add padding for better touch targets */
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.dropdown {
     display: flex;
     align-content: stretch;
     align-items: center;
     min-width: 30vw;
     justify-content: space-evenly;
-  }
+}
 
-
-  :host ::ng-deep .p-menubar {
-    background-image: url('/assets/background.jpg'); /* Use a leading slash */
+:host ::ng-deep .p-menubar {
+    background-image: url('/assets/background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+/* Adaptive Behavior */
+@media (max-width: 1024px) {
+    .navbar-container {
+        flex-direction: column; /* Stack items on smaller screens */
+        align-items: flex-start; /* Align items to the start */
+    }
 }

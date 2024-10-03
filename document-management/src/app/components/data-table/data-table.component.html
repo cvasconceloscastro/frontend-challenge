@@ -1,21 +1,20 @@
-
-<div class="header" >
-    <div class="title-back-container" style="display: flex;">
-        <button pButton icon="pi pi-arrow-left" class="p-button-text" (click)="goBack()"></button>
-        <h2>{{ 'Expedientes Material' | translate }}</h2>
+<div class="header" role="banner" aria-label="Data Table Header">
+    <div class="title-back-container" style="display: flex; align-items: center;">
+        <button pButton icon="pi pi-arrow-left" class="p-button-text" (click)="goBack()" aria-label="Go Back"></button>
+        <h2 style="margin: 0 10px;">{{ 'Expedientes Material' | translate }}</h2>
+        <nav class="navbar navbar-light bg-light" style="flex-grow: 1; display: flex; align-items: center; justify-content: flex-end;">
+            <form class="form-inline" style="display: flex;" aria-label="Search Form">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" (input)="onSearch($event)">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
+            </form>
+        </nav>
     </div>
-    <nav class="navbar navbar-light bg-light">
-        <form class="form-inline" style="display:flex;">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" (input)="onSearch($event)">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
-        </form>
-    </nav>
 </div>
 <div class="layout-container">
     <div class="tree-container">
-        <p-tree [value]="filteredFiles" class="w-full md:w-30rem" [filter]="true" filterPlaceholder="{{ 'SEARCH' | translate }}"></p-tree>
+        <p-tree [value]="filteredFiles" class="w-full md:w-30rem" [filter]="true" filterPlaceholder="{{ 'SEARCH' | translate }}" aria-label="File Tree"></p-tree>
     </div>
-    <div class="table-container">
+    <div class="table-container" role="table" aria-label="Data Table">
         <p-table 
         [value]="filteredItems"
             [paginator]="true" 
@@ -24,7 +23,7 @@
             scrollable="true" 
             scrollHeight="flex">
             <ng-template pTemplate="header">
-                <tr>
+                <tr role="row">
                     <th colspan="10" class="header-buttons-container">
                         <div class="header-left">
                             {{ 'DOCUMENT_COUNT' | translate: { total: getTotalRows() } }}
@@ -35,14 +34,15 @@
                                 type="button" 
                                 label="Delete ({{ getSelectedCount() }})" 
                                 (click)="deleteSelected()" 
-                                [disabled]="getSelectedCount() === 0">
+                                [disabled]="getSelectedCount() === 0"
+                                aria-label="Delete Selected Documents">
                             </button>
-                            <button pButton type="button" label="Expand All" (click)="expandAll()"></button>
-                            <button pButton type="button" label="Collapse All" (click)="collapseAll()"></button>
+                            <button pButton type="button" label="Expand All" (click)="expandAll()" aria-label="Expand All"></button>
+                            <button pButton type="button" label="Collapse All" (click)="collapseAll()" aria-label="Collapse All"></button>
                         </div>
                     </th>
                 </tr>
-                <tr>
+                <tr role="row">
                     <th></th>
                     <th></th>
                     <th></th>
@@ -57,12 +57,12 @@
             </ng-template>
 
             <ng-template pTemplate="body" let-item let-expanded="expanded">
-                <tr [ngClass]="{'p-highlight': item.selected}">
+                <tr role="row" [ngClass]="{'p-highlight': item.selected}">
                     <td>
                         <p-checkbox ngDefaultControl [(ngModel)]="item.selected" (change)="onRowSelect(item)"></p-checkbox>
                     </td>
                     <td>
-                        <p-button [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" class="p-button-text" (click)="item.expanded = !item.expanded"></p-button>
+                        <p-button [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" class="p-button-text" (click)="item.expanded = !item.expanded" aria-label="Toggle Expand"></p-button>
                     </td>
                     <td><i class="pi pi-file"></i></td>
                     <td>
@@ -77,13 +77,13 @@
                     </td>
                     <td>{{ item.date | date: 'dd/MM/yyyy, HH:mm' }}</td>
                     <td>{{ item.id }}</td>
-                    <td><i class="pi pi-star" [ngClass]="{ 'favorited': item.favorited }" (click)="toggleFavorite(item)"></i></td>
+                    <td><i class="pi pi-star" [ngClass]="{ 'favorited': item.favorited }" (click)="toggleFavorite(item)" aria-label="Toggle Favorite"></i></td>
                     <td><p-button icon="pi pi-ellipsis-v" class="p-button-text"></p-button></td>
                 </tr>
 
                 <tr *ngIf="item.expanded">
                     <td colspan="10">
-                        <div class="expanded-content-grid">
+                        <div class="expanded-content-grid" role="region" aria-label="Expanded Content">
                             <div class="grid-image">
                                 <img src="assets/doc.png" alt="Document Image">
                             </div>

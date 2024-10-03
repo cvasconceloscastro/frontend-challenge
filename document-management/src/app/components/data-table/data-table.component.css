@@ -1,86 +1,52 @@
 .layout-container {
     display: flex;
-  }
-  
-  .tree-container {
-    padding: 1vw; 
-  }
-  
-  .table-container {
-    width: 100vw;
-    padding-top: 2vh;
-  }
+    flex-wrap: nowrap; /* Prevent wrapping */
+    width: 100vw; /* Full width */
+}
 
-  td i.pi-star {
+.tree-container {
+    width: 20vw; /* Set to occupy 15% of the viewport width */
+    padding: 1vh 1vw; /* Add vertical padding */
+}
+
+.table-container {
+    flex: 1; /* Take remaining width */
+    padding-top: 2vh; /* Top padding for spacing */
+}
+
+/* Adjustments for header items */
+.title-back-container {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Space items */
+    width: 100%; /* Full width */
+}
+
+/* Optional: Ensure the search bar is styled well */
+.navbar {
+    margin-left: auto; /* Push search bar to the right */
+}
+
+
+td i.pi-star {
     cursor: pointer;
-  }
-  
-  i.favorited {
-    color: gold;
-  }
-  
+}
 
-  .expanded-content-grid {
+i.favorited {
+    color: gold;
+}
+
+.expanded-content-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid */
     gap: 10px;
     padding: 10px;
     background-color: #f9f9f9;
-  }
-  
-  .grid-image {
-    grid-column: span 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .grid-image img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .grid-column {
-    grid-column: span 1;
-  }
-  
-  .grid-column strong {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .grid-column p {
-    margin: 0 0 10px 0;
-  }
-
-  .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background-color: #f5f5f5;
-    border-bottom: 1px solid #ccc;
-}
-.header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-.header-left {
-    display: flex;
-    align-items: center;
 }
 
-.header-left button {
-    margin-right: 1rem;
-}
-
-.header-right {
-    display: flex;
-    align-items: center;
-}
-
-.header-right input {
-    width: 200px;
+/* Media Queries for responsive design */
+@media (max-width: 1024px) {
+    .layout-container {
+        flex-direction: column; /* Stack layout on small screens */
+    }
 }
