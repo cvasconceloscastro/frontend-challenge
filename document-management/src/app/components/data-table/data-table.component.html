@@ -1,11 +1,23 @@
+
+<div class="header" >
+    <div class="title-back-container" style="display: flex;">
+        <button pButton icon="pi pi-arrow-left" class="p-button-text" (click)="goBack()"></button>
+        <h2>{{ 'Expedientes Material' | translate }}</h2>
+    </div>
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline" style="display:flex;">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" (input)="onSearch($event)">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
+        </form>
+    </nav>
+</div>
 <div class="layout-container">
     <div class="tree-container">
-        <p-tree [value]="files" class="w-full md:w-30rem" [filter]="true" filterPlaceholder="{{ 'SEARCH' | translate }}"></p-tree>
+        <p-tree [value]="filteredFiles" class="w-full md:w-30rem" [filter]="true" filterPlaceholder="{{ 'SEARCH' | translate }}"></p-tree>
     </div>
-
     <div class="table-container">
         <p-table 
-            [value]="items" 
+        [value]="filteredItems"
             [paginator]="true" 
             [rows]="10" 
             [resizableColumns]="true" 

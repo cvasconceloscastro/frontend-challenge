@@ -18,6 +18,8 @@ import { TableModule } from 'primeng/table';
 import { TreeModule } from 'primeng/tree';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
+
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -32,6 +34,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   imports: [
     CheckboxModule,
+    InputTextModule,
     TreeModule,
     ButtonModule,
     TableModule,

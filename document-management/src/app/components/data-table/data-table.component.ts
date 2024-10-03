@@ -11,7 +11,7 @@ interface DataItem {
   date: Date;
   favorited: boolean;
   selected: boolean;
-  expanded: boolean;  // New property to track expanded/collapsed state
+  expanded: boolean;
 }
 
 interface FileNode {
@@ -37,7 +37,7 @@ export class DataTableComponent {
       date: new Date(),
       favorited: false,
       selected: false,
-      expanded: false  // Initialize as collapsed
+      expanded: false
     },
     {
       id: '23456789',
@@ -49,9 +49,11 @@ export class DataTableComponent {
       date: new Date(),
       favorited: true,
       selected: false,
-      expanded: false  // Initialize as collapsed
+      expanded: false
     }
   ];
+
+  filteredItems: DataItem[] = [...this.items];
 
   files: FileNode[] = [
     {
@@ -65,9 +67,7 @@ export class DataTableComponent {
 
   constructor(private translate: TranslateService) {}
 
-  getTotalRows(): number {
-    return this.items.length;
-  }
+
 
   getTableHeaders() {
     return {
@@ -79,31 +79,68 @@ export class DataTableComponent {
       date: this.translate.instant('TABLE_DATE')
     };
   }
-
+  onSearch(event: any): void {
+    const searchTerm = event.target.value.toLowerCase();
+  
+    // Filter table items
+    this.filteredItems = this.items.filter(item => 
+      item.name.toLowerCase().includes(searchTerm) || 
+      item.description.toLowerCase().includes(searchTerm) ||
+      item.status.toLowerCase().includes(searchTerm) ||
+      item.id.toLowerCase().includes(searchTerm)
+    );
+  
+    // Filter tree nodes
+    this.filteredFiles = this.filterTreeNodes(this.files, searchTerm);
+  }
+  
+  
+  // Method to count the total number of documents (filtered items)
+  getTotalRows(): number {
+      return this.filteredItems.length; // Use filteredItems to count the rows
+  }
   toggleFavorite(item: DataItem): void {
     item.favorited = !item.favorited;
   }
 
   expandAll(): void {
-    this.items.forEach(item => item.expanded = true);
+    this.filteredItems.forEach(item => item.expanded = true);
   }
   
   collapseAll(): void {
-    this.items.forEach(item => item.expanded = false);
+    this.filteredItems.forEach(item => item.expanded = false);
   }
 
-
   getSelectedCount(): number {
-    return this.items.filter(item => item.selected).length;
+    return this.filteredItems.filter(item => item.selected).length;
   }
 
   onRowSelect(item: DataItem): void {
-    // This method updates the selected state based on the checkbox value
-    item.selected = !item.selected; // Toggle the selected state
-}
-
-  deleteSelected(): void {
-    this.items = this.items.filter(item => !item.selected);
+    item.selected = !item.selected;
   }
 
+  deleteSelected(): void {
+    this.filteredItems = this.filteredItems.filter(item => !item.selected);
+  }
+
+  goBack(): void {
+    window.history.back();
+  }
+
+  filteredFiles: FileNode[] = [...this.files]; // Initialize filtered tree data
+
+// Recursive function to filter tree nodes
+filterTreeNodes(nodes: FileNode[], searchTerm: string): FileNode[] {
+  return nodes.reduce((acc: FileNode[], node: FileNode) => {
+    // If node label matches, or if any child node matches
+    if (node.label.toLowerCase().includes(searchTerm) || 
+        (node.children && this.filterTreeNodes(node.children, searchTerm).length > 0)) {
+
+      // Clone the node and filter its children (if any)
+      const filteredNode = { ...node, children: node.children ? this.filterTreeNodes(node.children, searchTerm) : [] };
+      acc.push(filteredNode);
+    }
+    return acc;
+  }, []);
+}
 }
