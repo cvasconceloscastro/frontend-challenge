@@ -1,0 +1,12 @@
+{
+  "TITLE": "Prueba FrontEnd",
+  "ENABLE_VIEWING_PERMISSIONS": "Habilitar permisos de visualización",
+  "TABLE_ID": "ID",
+  "TABLE_NAME": "Nombre",
+  "TABLE_DESCRIPTION": "Descripción",
+  "SEARCH": "Filtrar carpetas del expediente",
+  "TABLE_LABEL": "Etiqueta",
+  "TABLE_STATUS": "Estado",
+  "TABLE_DATE": "Fecha",
+  "DOCUMENT_COUNT": "Contiene {{total}} documentos"
+}

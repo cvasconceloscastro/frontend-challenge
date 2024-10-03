@@ -1,0 +1,13 @@
+{
+  "TITLE": "Test FrontEnd Developer",
+  "ENABLE_VIEWING_PERMISSIONS": "Enable Viewing Permissions",
+  "TABLE_ID": "ID",
+  "TABLE_NAME": "Name",
+  "TABLE_DESCRIPTION": "Description",
+  "SEARCH": "Filter file folders",
+  "TABLE_LABEL": "Label",
+  "TABLE_STATUS": "Status",
+  "TABLE_DATE": "Date",
+  "DOCUMENT_COUNT": "Contains {{total}} documents"
+
+}

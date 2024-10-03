@@ -1,0 +1,102 @@
+<div class="layout-container">
+    <div class="tree-container">
+        <p-tree [value]="files" class="w-full md:w-30rem" [filter]="true" filterPlaceholder="{{ 'SEARCH' | translate }}"></p-tree>
+    </div>
+
+    <div class="table-container">
+        <p-table 
+            [value]="items" 
+            [paginator]="true" 
+            [rows]="10" 
+            [resizableColumns]="true" 
+            scrollable="true" 
+            scrollHeight="flex">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th colspan="10" class="header-buttons-container">
+                        <div class="header-left">
+                            {{ 'DOCUMENT_COUNT' | translate: { total: getTotalRows() } }}
+                        </div>
+                        <div class="header-right">
+                            <button 
+                                pButton 
+                                type="button" 
+                                label="Delete ({{ getSelectedCount() }})" 
+                                (click)="deleteSelected()" 
+                                [disabled]="getSelectedCount() === 0">
+                            </button>
+                            <button pButton type="button" label="Expand All" (click)="expandAll()"></button>
+                            <button pButton type="button" label="Collapse All" (click)="collapseAll()"></button>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>{{ getTableHeaders().name }}</th>
+                    <th>{{ getTableHeaders().label }}</th>
+                    <th>{{ getTableHeaders().status }}</th>
+                    <th>{{ getTableHeaders().date }}</th>
+                    <th>{{ getTableHeaders().id }}</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-item let-expanded="expanded">
+                <tr [ngClass]="{'p-highlight': item.selected}">
+                    <td>
+                        <p-checkbox ngDefaultControl [(ngModel)]="item.selected" (change)="onRowSelect(item)"></p-checkbox>
+                    </td>
+                    <td>
+                        <p-button [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" class="p-button-text" (click)="item.expanded = !item.expanded"></p-button>
+                    </td>
+                    <td><i class="pi pi-file"></i></td>
+                    <td>
+                        <strong>{{ item.name }}</strong><br>
+                        <span>{{ item.description }}</span>
+                    </td>
+                    <td><i class="pi pi-tag"></i></td>
+                    <td>
+                        <span>{{ item.status }}</span><br>
+                        <hr>
+                        <small>{{ item.statusDetails }}</small>
+                    </td>
+                    <td>{{ item.date | date: 'dd/MM/yyyy, HH:mm' }}</td>
+                    <td>{{ item.id }}</td>
+                    <td><i class="pi pi-star" [ngClass]="{ 'favorited': item.favorited }" (click)="toggleFavorite(item)"></i></td>
+                    <td><p-button icon="pi pi-ellipsis-v" class="p-button-text"></p-button></td>
+                </tr>
+
+                <tr *ngIf="item.expanded">
+                    <td colspan="10">
+                        <div class="expanded-content-grid">
+                            <div class="grid-image">
+                                <img src="assets/doc.png" alt="Document Image">
+                            </div>
+                            <div class="grid-column">
+                                <strong>Title 1</strong>
+                                <p>Description for title 1</p>
+                                <strong>Title 2</strong>
+                                <p>Description for title 2</p>
+                            </div>
+                            <div class="grid-column">
+                                <strong>Title 3</strong>
+                                <p>Description for title 3</p>
+                                <strong>Title 4</strong>
+                                <p>Description for title 4</p>
+                            </div>
+                            <div class="grid-column">
+                                <strong>Title 5</strong>
+                                <p>Description for title 5</p>
+                                <strong>Title 6</strong>
+                                <p>Description for title 6</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
