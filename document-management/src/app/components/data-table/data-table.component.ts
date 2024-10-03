@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { MockServiceService } from '../../services/mock-service.service';
 
 interface DataItem {
   id: string;
@@ -26,35 +27,9 @@ interface FileNode {
   styleUrls: ['./data-table.component.css']
 })
 export class DataTableComponent {
-  items: DataItem[] = [
-    {
-      id: '12345678',
-      name: 'Document 1',
-      description: 'Detailed description for document 1',
-      label: 'Label 1',
-      status: 'Processed',
-      statusDetails: 'Status line below the status',
-      date: new Date(),
-      favorited: false,
-      selected: false,
-      expanded: false
-    },
-    {
-      id: '23456789',
-      name: 'Document 2',
-      description: 'Detailed description for document 2',
-      label: 'Label 2',
-      status: 'Pending',
-      statusDetails: 'Status line below the status',
-      date: new Date(),
-      favorited: true,
-      selected: false,
-      expanded: false
-    }
-  ];
-
-  filteredItems: DataItem[] = [...this.items];
-
+  items: DataItem[] = [];
+  filteredItems: DataItem[] = [];
+  filteredFiles: FileNode[] = [];
   files: FileNode[] = [
     {
       label: 'Expedientes Material',
@@ -65,9 +40,14 @@ export class DataTableComponent {
     }
   ];
 
-  constructor(private translate: TranslateService) {}
+  constructor(private translate: TranslateService, private mockDataService: MockServiceService) {}
 
-
+  ngOnInit(): void {
+    this.mockDataService.getItems().subscribe(data => {
+      this.items = data;
+      this.filteredItems = [...this.items]; // Initialize filtered items
+    });
+  }
 
   getTableHeaders() {
     return {
@@ -79,21 +59,21 @@ export class DataTableComponent {
       date: this.translate.instant('TABLE_DATE')
     };
   }
+
   onSearch(event: any): void {
     const searchTerm = event.target.value.toLowerCase();
-  
+
     // Filter table items
-    this.filteredItems = this.items.filter(item => 
-      item.name.toLowerCase().includes(searchTerm) || 
+    this.filteredItems = this.items.filter(item =>
+      item.name.toLowerCase().includes(searchTerm) ||
       item.description.toLowerCase().includes(searchTerm) ||
       item.status.toLowerCase().includes(searchTerm) ||
       item.id.toLowerCase().includes(searchTerm)
     );
-  
+
     // Filter tree nodes
     this.filteredFiles = this.filterTreeNodes(this.files, searchTerm);
   }
-  
   
   // Method to count the total number of documents (filtered items)
   getTotalRows(): number {
@@ -127,7 +107,6 @@ export class DataTableComponent {
     window.history.back();
   }
 
-  filteredFiles: FileNode[] = [...this.files]; // Initialize filtered tree data
 
 // Recursive function to filter tree nodes
 filterTreeNodes(nodes: FileNode[], searchTerm: string): FileNode[] {
