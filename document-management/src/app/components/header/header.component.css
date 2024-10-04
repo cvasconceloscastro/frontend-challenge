@@ -2,7 +2,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 98vw;
     color: white;
     padding: 10px; /* Add padding for better touch targets */
 }
@@ -25,7 +24,9 @@ h1 {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    max-width: 100vw; 
 }
+
 
 /* Adaptive Behavior */
 @media (max-width: 1024px) {

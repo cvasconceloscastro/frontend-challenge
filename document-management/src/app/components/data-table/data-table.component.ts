@@ -32,10 +32,17 @@ export class DataTableComponent {
   filteredFiles: FileNode[] = [];
   files: FileNode[] = [
     {
-      label: 'Expedientes Material',
+      label: 'Bandeja de entrada',
       children: [
         { label: 'Subfolder 1' },
         { label: 'Subfolder 2' },
+      ]
+    },
+    {
+      label: 'Contenido de Islas Baleares',
+      children: [
+        { label: 'Expedientes Personal' },
+        { label: 'Expedientes Material' },
       ]
     }
   ];
