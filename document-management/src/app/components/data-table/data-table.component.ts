@@ -87,6 +87,10 @@ export class DataTableComponent {
     }
   }
   
+  unselectAll(): void {
+    this.filteredItems.forEach(item => item.selected = false);
+  }
+  
   // Method to count the total number of documents (filtered items)
   getTotalRows(): number {
       return this.filteredItems.length; // Use filteredItems to count the rows

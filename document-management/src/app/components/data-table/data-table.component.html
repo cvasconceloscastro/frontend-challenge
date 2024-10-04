@@ -1,27 +1,29 @@
-<div class="header" role="banner" aria-label="Data Table Header">
+<div class="header" role="banner" attr.aria-label="{{ 'DATA_TABLE_HEADER' | translate }}">
     <div class="title-back-container" style="display: flex; align-items: center;">
-        <button pButton icon="pi pi-arrow-left" class="p-button-text" (click)="goBack()" aria-label="Go Back"></button>
-        <h2 style="margin: 0 10px;">{{ 'Expedientes Material' | translate }}</h2>
+        <button pButton icon="pi pi-arrow-left" class="p-button-text" (click)="goBack()" attr.aria-label="{{ 'GO_BACK' | translate }}"></button>
+        <h2 style="margin: 0 10px;">{{ 'EXPEDIENTES_MATERIAL' | translate }}</h2>
         <nav class="navbar navbar-light" style="flex-grow: 1; display: flex; align-items: center; justify-content: flex-end; background-color: white;">
-            <form class="form-inline" style="display: flex; padding-right: 2vw;" aria-label="Search Form">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" (input)="onSearch($event)">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
+            <form class="form-inline" style="display: flex; padding-right: 2vw;" attr.aria-label="{{ 'SEARCH_FORM' | translate }}">
+                <input class="form-control mr-sm-2" type="search" [placeholder]="'SEARCH' | translate" attr.aria-label="{{ 'SEARCH' | translate }}" (input)="onSearch($event)">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="button">{{ 'SEARCH_BUTTON' | translate }}</button>
             </form>
         </nav>
     </div>
 </div>
+
 <div class="layout-container">
     <div class="tree-container">
-        <p-tree [value]="filteredFiles" class="w-full md:w-30rem" [filter]="true" filterPlaceholder="{{ 'SEARCH' | translate }}" aria-label="File Tree"></p-tree>
+        <p-tree [value]="filteredFiles" class="w-full md:w-30rem" [filter]="true" filterPlaceholder="{{ 'SEARCH' | translate }}" attr.aria-label="{{ 'FILE_TREE' | translate }}"></p-tree>
     </div>
-    <div class="table-container" role="table" aria-label="Data Table">
+    <div class="table-container" role="table" attr.aria-label="{{ 'DATA_TABLE' | translate }}">
         <p-table 
-        [value]="filteredItems"
+            [value]="filteredItems"
             [paginator]="true" 
             [rows]="10" 
             [resizableColumns]="true" 
             scrollable="true" 
             scrollHeight="flex">
+            
             <ng-template pTemplate="header">
                 <tr role="row">
                     <th colspan="10" class="header-buttons-container">
@@ -29,28 +31,41 @@
                             {{ 'DOCUMENT_COUNT' | translate: { total: getTotalRows() } }}
                         </div>
                         <div class="header-right">
+                            <!-- Delete button appears only when selected rows exist -->
                             <button 
+                                *ngIf="getSelectedCount() > 0"
                                 pButton 
                                 type="button" 
-                                label="Delete ({{ getSelectedCount() }})" 
+                                label="{{ 'DELETE_SELECTED' | translate: { count: getSelectedCount() } }}" 
                                 (click)="deleteSelected()" 
-                                [disabled]="getSelectedCount() === 0"
-                                aria-label="Delete Selected Documents">
+                                attr.aria-label="{{ 'DELETE_SELECTED_DOCUMENTS' | translate }}">
                             </button>
-                            <button pButton type="button" label="Expand All" (click)="expandAll()" aria-label="Expand All"></button>
-                            <button pButton type="button" label="Collapse All" (click)="collapseAll()" aria-label="Collapse All"></button>
+                        
+                            <!-- Unselect All button appears when there are selected rows -->
+                            <button 
+                                *ngIf="getSelectedCount() > 0"
+                                pButton 
+                                type="button" 
+                                label="{{ 'UNSELECT_ALL' | translate }}" 
+                                (click)="unselectAll()" 
+                                attr.aria-label="{{ 'UNSELECT_ALL' | translate }}">
+                            </button>
+                        
+                            <button pButton type="button" label="{{ 'EXPAND_ALL' | translate }}" (click)="expandAll()" attr.aria-label="{{ 'EXPAND_ALL' | translate }}"></button>
+                            <button pButton type="button" label="{{ 'COLLAPSE_ALL' | translate }}" (click)="collapseAll()" attr.aria-label="{{ 'COLLAPSE_ALL' | translate }}"></button>
                         </div>
+                        
                     </th>
                 </tr>
                 <tr role="row">
                     <th></th>
                     <th></th>
                     <th></th>
-                    <th>{{ getTableHeaders().name }}</th>
-                    <th>{{ getTableHeaders().label }}</th>
-                    <th>{{ getTableHeaders().status }}</th>
-                    <th>{{ getTableHeaders().date }}</th>
-                    <th>{{ getTableHeaders().id }}</th>
+                    <th pSortableColumn>{{ getTableHeaders().name }}</th>
+                    <th pSortableColumn>{{ getTableHeaders().label }}</th>
+                    <th pSortableColumn>{{ getTableHeaders().status }}</th>
+                    <th pSortableColumn>{{ getTableHeaders().date }}</th>
+                    <th pSortableColumn>{{ getTableHeaders().id }}</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -62,7 +77,7 @@
                         <p-checkbox ngDefaultControl [(ngModel)]="item.selected" (change)="onRowSelect(item)"></p-checkbox>
                     </td>
                     <td>
-                        <p-button [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" class="p-button-text" (click)="item.expanded = !item.expanded" aria-label="Toggle Expand"></p-button>
+                        <p-button [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" class="p-button-text" (click)="item.expanded = !item.expanded" attr.aria-label="{{ 'TOGGLE_EXPAND' | translate }}"></p-button>
                     </td>
                     <td><i class="pi pi-file"></i></td>
                     <td>
@@ -77,33 +92,33 @@
                     </td>
                     <td>{{ item.date | date: 'dd/MM/yyyy, HH:mm' }}</td>
                     <td>{{ item.id }}</td>
-                    <td><i class="pi pi-star" [ngClass]="{ 'favorited': item.favorited }" (click)="toggleFavorite(item)" aria-label="Toggle Favorite"></i></td>
+                    <td><i class="pi pi-star" [ngClass]="{ 'favorited': item.favorited }" (click)="toggleFavorite(item)" attr.aria-label="{{ 'TOGGLE_FAVORITE' | translate }}"></i></td>
                     <td><p-button icon="pi pi-ellipsis-v" class="p-button-text"></p-button></td>
                 </tr>
 
                 <tr *ngIf="item.expanded">
                     <td colspan="10">
-                        <div class="expanded-content-grid" role="region" aria-label="Expanded Content">
+                        <div class="expanded-content-grid" role="region" attr.aria-label="{{ 'EXPANDED_CONTENT' | translate }}">
                             <div class="grid-image">
-                                <img src="assets/doc.png" alt="Document Image">
+                                <img src="assets/doc.png" alt="{{ 'DOCUMENT_IMAGE' | translate }}">
                             </div>
                             <div class="grid-column">
-                                <strong>Title 1</strong>
-                                <p>Description for title 1</p>
-                                <strong>Title 2</strong>
-                                <p>Description for title 2</p>
+                                <strong>{{ 'TITLE_1' | translate }}</strong>
+                                <p>{{ 'DESCRIPTION_TITLE_1' | translate }}</p>
+                                <strong>{{ 'TITLE_2' | translate }}</strong>
+                                <p>{{ 'DESCRIPTION_TITLE_2' | translate }}</p>
                             </div>
                             <div class="grid-column">
-                                <strong>Title 3</strong>
-                                <p>Description for title 3</p>
-                                <strong>Title 4</strong>
-                                <p>Description for title 4</p>
+                                <strong>{{ 'TITLE_3' | translate }}</strong>
+                                <p>{{ 'DESCRIPTION_TITLE_3' | translate }}</p>
+                                <strong>{{ 'TITLE_4' | translate }}</strong>
+                                <p>{{ 'DESCRIPTION_TITLE_4' | translate }}</p>
                             </div>
                             <div class="grid-column">
-                                <strong>Title 5</strong>
-                                <p>Description for title 5</p>
-                                <strong>Title 6</strong>
-                                <p>Description for title 6</p>
+                                <strong>{{ 'TITLE_5' | translate }}</strong>
+                                <p>{{ 'DESCRIPTION_TITLE_5' | translate }}</p>
+                                <strong>{{ 'TITLE_6' | translate }}</strong>
+                                <p>{{ 'DESCRIPTION_TITLE_6' | translate }}</p>
                             </div>
                         </div>
                     </td>
