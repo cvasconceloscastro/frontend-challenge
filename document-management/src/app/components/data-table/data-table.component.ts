@@ -53,6 +53,7 @@ export class DataTableComponent {
     this.mockDataService.getItems().subscribe(data => {
       this.items = data;
       this.filteredItems = [...this.items]; // Initialize filtered items
+      this.filteredFiles = [...this.files]; // Initialize filtered tree files
     });
   }
 
@@ -69,7 +70,7 @@ export class DataTableComponent {
 
   onSearch(event: any): void {
     const searchTerm = event.target.value.toLowerCase();
-
+    
     // Filter table items
     this.filteredItems = this.items.filter(item =>
       item.name.toLowerCase().includes(searchTerm) ||
@@ -77,9 +78,13 @@ export class DataTableComponent {
       item.status.toLowerCase().includes(searchTerm) ||
       item.id.toLowerCase().includes(searchTerm)
     );
-
-    // Filter tree nodes
-    this.filteredFiles = this.filterTreeNodes(this.files, searchTerm);
+  
+    // Filter tree nodes, or show all if no search term
+    if (searchTerm) {
+      this.filteredFiles = this.filterTreeNodes(this.files, searchTerm);
+    } else {
+      this.filteredFiles = [...this.files]; // Show full tree when search term is empty
+    }
   }
   
   // Method to count the total number of documents (filtered items)
