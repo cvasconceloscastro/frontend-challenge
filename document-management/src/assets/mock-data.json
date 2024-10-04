@@ -1,0 +1,122 @@
+[
+  {
+    "id": "12345678",
+    "name": "Document 1",
+    "description": "Detailed description for document 1",
+    "label": "Label 1",
+    "status": "Processed",
+    "statusDetails": "Status line below the status",
+    "date": "2024-10-03T00:00:00.000Z",
+    "favorited": false,
+    "selected": false,
+    "expanded": false
+  },
+  {
+    "id": "23456789",
+    "name": "Document 2",
+    "description": "Detailed description for document 2",
+    "label": "Label 2",
+    "status": "Pending",
+    "statusDetails": "Status line below the status",
+    "date": "2024-10-04T00:00:00.000Z",
+    "favorited": true,
+    "selected": false,
+    "expanded": false
+  },
+  {
+    "id": "34567890",
+    "name": "Document 3",
+    "description": "Detailed description for document 3",
+    "label": "Label 3",
+    "status": "Draft",
+    "statusDetails": "Currently being edited",
+    "date": "2024-10-05T00:00:00.000Z",
+    "favorited": false,
+    "selected": false,
+    "expanded": false
+  },
+  {
+    "id": "45678901",
+    "name": "Document 4",
+    "description": "Detailed description for document 4",
+    "label": "Label 4",
+    "status": "Archived",
+    "statusDetails": "This document is archived",
+    "date": "2024-09-30T00:00:00.000Z",
+    "favorited": true,
+    "selected": false,
+    "expanded": false
+  },
+  {
+    "id": "56789012",
+    "name": "Document 5",
+    "description": "Detailed description for document 5",
+    "label": "Label 5",
+    "status": "In Review",
+    "statusDetails": "Waiting for approval",
+    "date": "2024-10-01T00:00:00.000Z",
+    "favorited": false,
+    "selected": false,
+    "expanded": false
+  },
+  {
+    "id": "67890123",
+    "name": "Document 6",
+    "description": "Detailed description for document 6",
+    "label": "Label 6",
+    "status": "Completed",
+    "statusDetails": "This document is completed",
+    "date": "2024-10-02T00:00:00.000Z",
+    "favorited": true,
+    "selected": false,
+    "expanded": false
+  },
+  {
+    "id": "78901234",
+    "name": "Document 7",
+    "description": "Detailed description for document 7",
+    "label": "Label 7",
+    "status": "Pending Approval",
+    "statusDetails": "Pending manager review",
+    "date": "2024-10-06T00:00:00.000Z",
+    "favorited": false,
+    "selected": false,
+    "expanded": false
+  },
+  {
+    "id": "89012345",
+    "name": "Document 8",
+    "description": "Detailed description for document 8",
+    "label": "Label 8",
+    "status": "Under Revision",
+    "statusDetails": "Document under revision",
+    "date": "2024-10-07T00:00:00.000Z",
+    "favorited": true,
+    "selected": false,
+    "expanded": false
+  },
+  {
+    "id": "90123456",
+    "name": "Document 9",
+    "description": "Detailed description for document 9",
+    "label": "Label 9",
+    "status": "Finalized",
+    "statusDetails": "Final version approved",
+    "date": "2024-10-08T00:00:00.000Z",
+    "favorited": false,
+    "selected": false,
+    "expanded": false
+  },
+  {
+    "id": "01234567",
+    "name": "Document 10",
+    "description": "Detailed description for document 10",
+    "label": "Label 10",
+    "status": "Cancelled",
+    "statusDetails": "This document has been cancelled",
+    "date": "2024-10-09T00:00:00.000Z",
+    "favorited": true,
+    "selected": false,
+    "expanded": false
+  }
+]

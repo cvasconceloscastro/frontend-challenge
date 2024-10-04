@@ -5,13 +5,15 @@
 }
 
 .tree-container {
-    width: 20vw; 
+    width: 15vw; 
     padding: 1vh 1vw; /* Add vertical padding */
 }
 
 .table-container {
     flex: 1; /* Take remaining width */
     padding-top: 2vh; /* Top padding for spacing */
+    max-height: 80vh; /* Set your desired maximum height */
+    overflow-y: auto; 
 }
 
 /* Adjustments for header items */
@@ -27,6 +29,9 @@
     margin-left: auto; /* Push search bar to the right */
 }
 
+.header-right{
+    float: right;
+}
 
 td i.pi-star {
     cursor: pointer;

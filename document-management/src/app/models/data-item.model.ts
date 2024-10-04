@@ -1,4 +1,3 @@
-// src/app/models/data-item.model.ts
 export interface DataItem {
     id: string;
     name: string;

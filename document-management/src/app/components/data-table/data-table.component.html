@@ -19,17 +19,18 @@
         <p-table 
             [value]="filteredItems"
             [paginator]="true" 
-            [rows]="10" 
+            [rows]="4" 
             [resizableColumns]="true" 
-            scrollable="true" 
-            scrollHeight="flex">
-            
+            [scrollable]="true" scrollHeight="100%" scrollWidth="100%"
+            >
             <ng-template pTemplate="header">
-                <tr role="row">
-                    <th colspan="10" class="header-buttons-container">
+                <tr role="row" class="header-frist">
+                    <th colspan="5" class="header-buttons-container">
                         <div class="header-left">
                             {{ 'DOCUMENT_COUNT' | translate: { total: getTotalRows() } }}
                         </div>
+                    </th>
+                    <th colspan="5" class="header-buttons-container">
                         <div class="header-right">
                             <!-- Delete button appears only when selected rows exist -->
                             <button 

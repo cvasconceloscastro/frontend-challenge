@@ -19,7 +19,7 @@ import { TreeModule } from 'primeng/tree';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
-
+import { PaginatorModule } from 'primeng/paginator';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -33,6 +33,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DataTableComponent
   ],
   imports: [
+    PaginatorModule,
     CheckboxModule,
     InputTextModule,
     TreeModule,
