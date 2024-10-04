@@ -1,27 +1,42 @@
-# DocumentManagement
+# Document Management Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.7.
+## Overview
 
-## Development server
+The Document Management Application is a web-based application built with Angular that provides a comprehensive solution for managing documents. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Features
+- **Document List**: Displays a list of documents with details such as name, description, status, and date.
+- **Search Functionality**: Easily search for documents using the search bar.
+- **Tree Structure**: Organize documents in a hierarchical tree format for easy navigation.
+- **Pagination**: Efficiently manage large sets of documents with pagination controls.
+- **Expandable Rows**: View additional information for each document by expanding rows.
+- **Multi-Language Support**: Switch between different languages for a better user experience.
 
-## Code scaffolding
+## Getting Started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+To run this project locally, follow these steps:
 
-## Build
+### Prerequisites
+- **Node.js**: Ensure you have Node.js installed. You can download it from [nodejs.org](https://nodejs.org/).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/cvasconceloscastro/frontend-tech-challenge.git
+Navigate to the project directory:
 
-## Running unit tests
+2. Navigate to the project directory:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+   ```bash
+   cd document-management
 
-## Running end-to-end tests
+3. Install the necessary dependencies:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+    ```bash
+   npm install
 
-## Further help
+### Start the project:
+1. Navigate to src directory
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+    ```bash
+   npm start
